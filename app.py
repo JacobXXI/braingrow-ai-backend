@@ -50,5 +50,26 @@ def login():
         })
     return jsonify({'error': 'Invalid credentials'}), 401
 
+@app.route('/profile')
+def profile():
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'error': 'Authorization header missing'}), 401
+    try:
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+        user = userProfile(data['user_id'])
+        if user:
+            return jsonify({
+                'user_id': user.id,
+                'username': user.username,
+                'tendency': user.tendency,
+                'photoUrl': user.photoUrl
+            }) 
+    except jwt.ExpiredSignatureError:
+        return jsonify({'error': 'Token has expired'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'error': 'Invalid token'}), 401
+    return jsonify({'error': 'Invalid credentials'}), 401
+
 if __name__ == '__main__':
     app.run(debug=True)
