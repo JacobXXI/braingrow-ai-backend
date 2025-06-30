@@ -160,8 +160,3 @@ curl -H "Authorization: <token>" http://localhost:5000/profile
 {"error": "Invalid token"}
 {"error": "Invalid credentials"}
 ```
-
-```
-
-
-```
