@@ -1,10 +1,10 @@
-from flask import Flask, session, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, session, jsonify, request
 from flask_session import Session
 from videodb import *
 from userdb import *
 import jwt
 import datetime
+from models import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config['SECRET_KEY'] = "your-secret-key-here"  # Change this to a secure secret
-db = SQLAlchemy(app)
+db.init_app(app)
 
 @app.route('/')
 def home():
@@ -72,4 +72,4 @@ def profile():
     return jsonify({'error': 'Invalid credentials'}), 401
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
