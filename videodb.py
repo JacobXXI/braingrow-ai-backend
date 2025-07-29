@@ -17,3 +17,6 @@ def searchVideo(searchQuery: str):
             video.tags.like('%' + searchQuery + '%')
         )
     ).all()
+
+def getVideoById(video_id):
+    return video.query.filter_by(id=video_id).first()

@@ -52,14 +52,45 @@ def search():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/login', methods=['POST'])  # Added POST method
+@app.route('/api/video/<video_id>')
+def get_video(video_id):
+    try:
+        # Assuming you have a getVideoById function in videodb
+        video = getVideoById(video_id)
+        if video:
+            return jsonify({
+                '_id': video.id,
+                'title': video.title,
+                'description': video.description,
+                'author': video.author if hasattr(video, 'author') else 'Unknown',
+                'date': video.date.isoformat() if hasattr(video, 'date') else None,
+                'category': video.category if hasattr(video, 'category') else 'General',
+                'views': video.views if hasattr(video, 'views') else 0,
+                'likes': video.likes if hasattr(video, 'likes') else 0,
+                'dislikes': video.dislikes if hasattr(video, 'dislikes') else 0,
+                'url': video.url,
+                'coverUrl': video.imageUrl
+            })
+        return jsonify({'error': 'Video not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/login', methods=['POST'])  # Changed to /api/login
 def login():
+    # Handle both Basic Auth and JSON body
     auth = request.authorization
-    if not auth or not auth.username or not auth.password:
-        return jsonify({'error': 'Authorization header missing'}), 401
+    if not auth and request.json:
+        # Handle JSON login
+        username = request.json.get('username')
+        password = request.json.get('password')
+    elif auth:
+        username = auth.username
+        password = auth.password
+    else:
+        return jsonify({'error': 'Username and password required'}), 401
         
     try:
-        user = userLogin(auth.username, auth.password)
+        user = userLogin(username, password)
         if user:
             token = jwt.encode({
                 'user_id': user.id,
@@ -75,7 +106,30 @@ def login():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/profile')
+@app.route('/api/register', methods=['POST'])
+def register():
+    try:
+        data = request.json
+        username = data.get('username')
+        password = data.get('password')
+        email = data.get('email')
+        
+        if not username or not password:
+            return jsonify({'error': 'Username and password required'}), 400
+            
+        # Assuming you have a userRegister function
+        user = userRegister(username, password, email)
+        if user:
+            return jsonify({
+                'message': 'User created successfully',
+                'user_id': user.id,
+                'username': user.username
+            }), 201
+        return jsonify({'error': 'User creation failed'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/profile')
 def profile():
     token = request.headers.get('Authorization')
     if not token:
