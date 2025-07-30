@@ -35,15 +35,15 @@ class Video(db.Model):
 
 # Video Database Functions
 def searchVideo(searchQuery: str, maxVideo: int):
-    return video.query.filter(
+    return Video.query.filter(
         db.or_(
-            video.title.like('%' + searchQuery + '%'),
-            video.tags.like('%' + searchQuery + '%')
+            Video.title.like('%' + searchQuery + '%'),
+            Video.tags.like('%' + searchQuery + '%')
         )
     ).limit(maxVideo).all()
 
 def getRecommendedVideos(limit: int = 5):
-    return video.query.order_by(func.random()).limit(limit).all()
+    return Video.query.order_by(func.random()).limit(limit).all()
 
 def getVideoById(video_id):
     return Video.query.filter_by(id=video_id).first()

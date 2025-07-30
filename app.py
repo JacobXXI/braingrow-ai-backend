@@ -10,7 +10,7 @@ from functools import wraps
 from models import (
     db, Video, User,
     searchVideo, getVideoById, addVideo,
-    userLogin, userRegister, userProfile
+    userLogin, userRegister, userProfile, getRecommendedVideos
 )
 
 app = Flask(__name__)
@@ -73,12 +73,13 @@ def home():
 def search():
     try:
         searchQuery = request.args.get('query')
+        limit = request.args.get('maxVideo', 5, type=int)
         print(f"Received search query: {searchQuery}")
         
         if not searchQuery:
             return jsonify({'error': 'Query parameter is required'}), 400
         
-        videos = searchVideo(searchQuery)
+        videos = searchVideo(searchQuery, limit)
         print(f"Found {len(videos) if videos else 0} videos")
         
         if not videos:
