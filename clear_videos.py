@@ -1,6 +1,5 @@
 from flask import Flask
-from models import db
-from videodb import video
+from models import db, Video
 
 # Create a minimal Flask app to access the database
 app = Flask(__name__)
@@ -15,7 +14,7 @@ def clear_all_videos():
     with app.app_context():
         try:
             # Get current video count
-            video_count = video.query.count()
+            video_count = Video.query.count()
             if video_count == 0:
                 print("No videos found in database.")
                 return
@@ -27,7 +26,7 @@ def clear_all_videos():
                 return
 
             # Delete all videos
-            video.query.delete()
+            Video.query.delete()
             db.session.commit()
             print(f"Successfully deleted {video_count} videos.")
 

@@ -1,12 +1,11 @@
-from models import db
+from models import db, Video
 from app import app
-from videodb import video
 import time
 import argparse
 
 def add_video(title: str, description: str, url: str, tags: str, image_url: str):
     """Add a new video to the database"""
-    new_video = video(
+    new_video = Video(
         title=title,
         description=description,
         url=url,
