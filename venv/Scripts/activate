@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Jinglin Yang\OneDrive\Documents\braingrow-ai-backend\braingrow-ai-backend\venv"
+VIRTUAL_ENV="C:\Users\Jinglin Yang\OneDrive - boxhillhs.vic.edu.au\Documents\BrainGrow\braingrow-ai-backend\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
