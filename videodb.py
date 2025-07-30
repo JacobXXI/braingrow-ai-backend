@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 from models import db
-
+from sqlalchemy import func
 
 class video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,14 +11,16 @@ class video(db.Model):
     def __repr__(self):
         return f"Video('{self.title}', '{self.description}', '{self.url}', '{self.tags}', '{self.imageUrl}')"
 
-def searchVideo(searchQuery: str):
+def searchVideo(searchQuery: str, maxVideo: int):
     return video.query.filter(
         db.or_(
             video.title.like('%' + searchQuery + '%'),
             video.tags.like('%' + searchQuery + '%')
         )
-    ).all()
-    # return video.query.all()
+    ).limit(maxVideo).all()
+
+def getRecommendedVideos(limit: int = 5):
+    return video.query.order_by(func.random()).limit(limit).all()
 
 def getVideoById(video_id):
     return video.query.filter_by(id=video_id).first()

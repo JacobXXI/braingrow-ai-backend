@@ -38,10 +38,12 @@ def home():
 def search():
     try:
         searchQuery = request.args.get('query')
+        maxVideo = request.args.get('maxVideo')
+
         if not searchQuery:
             return jsonify({'error': 'Query parameter is required'}), 400
             
-        videos = searchVideo(searchQuery)
+        videos = searchVideo(searchQuery, maxVideo)
         return jsonify([{
             'id': v.id,
             'title': v.title,
@@ -54,6 +56,19 @@ def search():
         print(e)
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/recommendations')
+def get_recommendations():
+    limit = request.args.get('maxVideo', 5, type=int)
+    videos = getRecommendedVideos(limit)
+    return jsonify([{
+        'id': v.id,
+        'title': v.title,
+        'description': v.description,
+        'url': v.url,
+        'tags': v.tags,
+        'imageUrl': v.imageUrl
+    } for v in videos])
+        
 @app.route('/api/video/<video_id>')
 def get_video(video_id):
     try:
