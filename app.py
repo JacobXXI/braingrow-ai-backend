@@ -10,7 +10,7 @@ from functools import wraps
 from models import (
     db, Video, User,
     searchVideo, getVideoById, addVideo,
-    userLogin, userRegister, userProfile
+    userLogin, userRegister, userProfile, getRecommendedVideos
 )
 
 app = Flask(__name__)
@@ -73,12 +73,13 @@ def home():
 def search():
     try:
         searchQuery = request.args.get('query')
+        limit = request.args.get('maxVideo', 5, type=int)
         print(f"Received search query: {searchQuery}")
         
         if not searchQuery:
             return jsonify({'error': 'Query parameter is required'}), 400
         
-        videos = searchVideo(searchQuery)
+        videos = searchVideo(searchQuery, limit)
         print(f"Found {len(videos) if videos else 0} videos")
         
         if not videos:
@@ -107,8 +108,20 @@ def search():
         print(f"Traceback: {traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
 
-# Updated video endpoint to match frontend expectations
-@app.route('/api/videos/<video_id>')
+@app.route('/api/recommendations')
+def get_recommendations():
+    limit = request.args.get('maxVideo', 5, type=int)
+    videos = getRecommendedVideos(limit)
+    return jsonify([{
+        'id': v.id,
+        'title': v.title,
+        'description': v.description,
+        'url': v.url,
+        'tags': v.tags,
+        'imageUrl': v.imageUrl
+    } for v in videos])
+        
+@app.route('/api/video/<video_id>')
 def get_video(video_id):
     try:
         video = getVideoById(video_id)

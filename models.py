@@ -34,13 +34,16 @@ class Video(db.Model):
         return f"Video('{self.title}', '{self.description}', '{self.url}', '{self.tags}', '{self.imageUrl}')"
 
 # Video Database Functions
-def searchVideo(searchQuery: str):
+def searchVideo(searchQuery: str, maxVideo: int):
     return Video.query.filter(
         db.or_(
             Video.title.like('%' + searchQuery + '%'),
             Video.tags.like('%' + searchQuery + '%')
         )
-    ).all()
+    ).limit(maxVideo).all()
+
+def getRecommendedVideos(limit: int = 5):
+    return Video.query.order_by(func.random()).limit(limit).all()
 
 def getVideoById(video_id):
     return Video.query.filter_by(id=video_id).first()
