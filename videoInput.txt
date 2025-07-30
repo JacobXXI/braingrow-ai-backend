@@ -1,0 +1,62 @@
+=== AI Ethics ===
+
+Video 6:
+Title: AI Governance Frameworks
+Description: Comparing international approaches to AI governance and regulation.
+URL: https://www.youtube.com/watch?v=0f3w184oA0I
+Tags: ai governance, regulation, policy, ethics
+Image URL: https://i.ytimg.com/vi/0f3w184oA0I/hqdefault.jpg
+
+=== Machine Learning ===
+
+Video 6:
+Title: Transfer Learning in Practice
+Description: How to apply transfer learning techniques to real-world ML projects.
+URL: https://www.youtube.com/watch?v=BqqfQnyjmgg
+Tags: machine learning, transfer learning, deep learning, ai
+Image URL: https://i.ytimg.com/vi/BqqfQnyjmgg/hqdefault.jpg
+
+=== Quantum Computing ===
+
+Video 6:
+Title: Quantum Algorithms Explained
+Description: Understanding Shor's and Grover's algorithms and their implications.
+URL: https://www.youtube.com/watch?v=lvTqbM5Dq4Q
+Tags: quantum algorithms, shor's algorithm, grover's algorithm, quantum computing
+Image URL: https://i.ytimg.com/vi/lvTqbM5Dq4Q/hqdefault.jpg
+
+=== Sustainable Tech ===
+
+Video 6:
+Title: Green Data Centers
+Description: How companies are reducing carbon footprint of data infrastructure.
+URL: https://www.youtube.com/watch?v=YVYVj08wYqA
+Tags: data centers, sustainable tech, green it, carbon footprint
+Image URL: https://i.ytimg.com/vi/YVYVj08wYqA/hqdefault.jpg
+
+=== Metaverse ===
+
+Video 6:
+Title: Metaverse Accessibility
+Description: Ensuring virtual worlds are accessible to users with disabilities.
+URL: https://www.youtube.com/watch?v=6ZgF7J1eY6Y
+Tags: metaverse, accessibility, inclusive design, virtual reality
+Image URL: https://i.ytimg.com/vi/6ZgF7J1eY6Y/hqdefault.jpg
+
+=== Cybersecurity ===
+
+Video 6:
+Title: Zero Trust Architecture
+Description: Implementing zero trust security models in modern organizations.
+URL: https://www.youtube.com/watch?v=pg-gCxGlP2Y
+Tags: zero trust, cybersecurity, network security, information security
+Image URL: https://i.ytimg.com/vi/pg-gCxGlP2Y/hqdefault.jpg
+
+=== Renewable Energy ===
+
+Video 6:
+Title: Geothermal Energy Technology
+Description: Advancements in geothermal power generation systems.
+URL: https://www.youtube.com/watch?v=uB8xG9Y7jwY
+Tags: geothermal, renewable energy, green technology, sustainable energy
+Image URL: https://i.ytimg.com/vi/uB8xG9Y7jwY/hqdefault.jpg

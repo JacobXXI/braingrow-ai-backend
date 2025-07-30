@@ -22,6 +22,9 @@ app.config['SECRET_KEY'] = "your-secret-key-here"
 # Initialize extensions
 db.init_app(app)
 Session(app)
+
+# Allow only frontend origin with credentials support
+CORS(app, origins=["http://localhost:5174"], supports_credentials=True)
 CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 
 # Create database tables
@@ -67,6 +70,7 @@ def search():
     except Exception as e:
         print(f"Error in search route: {str(e)}")
         print(f"Traceback: {traceback.format_exc()}")
+        print(e)
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/video/<video_id>')
