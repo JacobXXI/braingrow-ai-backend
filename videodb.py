@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+from models import db
 
 
 class video(db.Model):
@@ -19,6 +19,7 @@ def searchVideo(searchQuery: str):
             video.tags.like('%' + searchQuery + '%')
         )
     ).all()
+    # return video.query.all()
 
 def getVideoById(video_id):
     return video.query.filter_by(id=video_id).first()

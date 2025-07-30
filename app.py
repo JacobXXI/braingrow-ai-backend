@@ -50,6 +50,7 @@ def search():
             'imageUrl': v.imageUrl
         } for v in videos])
     except Exception as e:
+        print(e)
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/video/<video_id>')
