@@ -19,6 +19,7 @@ db.init_app(app)
 Session(app)
 
 # Allow only frontend origin with credentials support
+CORS(app, origins=["http://localhost:5174"], supports_credentials=True)
 CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 
 # Create database tables
