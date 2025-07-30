@@ -5,7 +5,7 @@ from videodb import *
 from userdb import *
 import jwt
 import datetime
-from app import db
+from models import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
